@@ -16,10 +16,17 @@ if (environment.production) {
   enableProdMode();
 }
 
-const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err) => console.log(err));
 
+// const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
+
+/*
 if (environment.hmr) {
   hmrBootstrap(module, bootstrap);
 } else {
   bootstrap().catch((err) => console.error(err));
 }
+
+ */
