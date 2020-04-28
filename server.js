@@ -87,8 +87,8 @@ app.put('/api/games/:id', function (req, res) {
     }
   });
 
-  app.post('/api/games/{id]/commit', function (req, res) {
-    var username = req.body;
+  app.post('/api/games/{id]/commit/{username}', function (req, res) {
+    var username = req.params.username;
     db.collection(GAMES_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function (err, doc) {
       if (err) {
         handleError(res, err.message, 'Failed to add commit');
@@ -118,8 +118,8 @@ app.put('/api/games/:id', function (req, res) {
     });
   });
 
-  app.post('/api/games/{id]/uncommit', function (req, res) {
-    var username = req.body;
+  app.post('/api/games/{id]/uncommit/{username}', function (req, res) {
+    var username = req.params.username;
     db.collection(GAMES_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function (err, doc) {
       if (err) {
         handleError(res, err.message, 'Failed to remove commit');
