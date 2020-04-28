@@ -72,9 +72,9 @@ app.put('/api/games/:id', function (req, res) {
   delete updateDoc._id;
   // updateDoc._id = req.params.id;
   console.log(updateDoc);
-  db.collection(GAMES_COLLECTION).findOneAndUpdate(ObjectId(req.params.id), updateDoc, function (err, doc) {
+  db.collection(GAMES_COLLECTION).updateOne({ _id: new ObjectId(req.params.id) }, updateDoc, function (err, doc) {
     if (err) {
-      handleError(res, err.message, 'Failed to update game with ID' + updateDoc._id);
+      handleError(res, err.message, 'Failed to update game with ID' + doc._id);
     } else {
       res.status(200).json(doc);
     }
