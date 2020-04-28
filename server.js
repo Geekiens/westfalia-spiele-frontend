@@ -69,7 +69,7 @@ app.post('/api/games', function (req, res) {
 
 app.put('/api/games/:id', function (req, res) {
   var updateDoc = req.body;
-  delete updateDoc._id;
+  // delete updateDoc._id;
 
   db.collection(GAMES_COLLECTION).findOneAndUpdate({ _id: { $eq: req.params.id } }, updateDoc, function (err, doc) {
     if (err) {
