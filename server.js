@@ -87,6 +87,86 @@ app.put('/api/games/:id', function (req, res) {
     }
   });
 
+  app.post('/api/games/{id]/commit', function (req, res) {
+    var username = req.body;
+    db.collection(GAMES_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function (err, doc) {
+      if (err) {
+        handleError(res, err.message, 'Failed to add commit');
+      } else {
+        var updateDoc = doc;
+        delete updateDoc._id;
+
+        db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectId(req.params.id) }, function (err, result) {
+          if (err) {
+            handleError(res, err.message, 'Failed to add commit');
+          } else {
+            if (!updateDoc.committed) {
+              updateDoc.committed = [username];
+            } else {
+              updateDoc.committed.push(username);
+            }
+            db.collection(GAMES_COLLECTION).insertOne(updateDoc, function (err, doc) {
+              if (err) {
+                handleError(res, err.message, 'Failed to add commit');
+              } else {
+                res.status(201).json(doc.ops[0]);
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+
+  app.post('/api/games/{id]/uncommit', function (req, res) {
+    var username = req.body;
+    db.collection(GAMES_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function (err, doc) {
+      if (err) {
+        handleError(res, err.message, 'Failed to remove commit');
+      } else {
+        var updateDoc = doc;
+        delete updateDoc._id;
+
+        db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectId(req.params.id) }, function (err, result) {
+          if (err) {
+            handleError(res, err.message, 'Failed to remove commit');
+          } else {
+            const index = updateDoc.committed.indexOf(username);
+            if (index > -1) {
+              updateDoc.committed.splice(index, 1);
+            }
+
+            db.collection(GAMES_COLLECTION).insertOne(updateDoc, function (err, doc) {
+              if (err) {
+                handleError(res, err.message, 'Failed to remove commit');
+              } else {
+                res.status(201).json(doc.ops[0]);
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+
+  var updateDoc = req.body;
+  delete updateDoc._id;
+  // updateDoc._id = req.params.id;
+  console.log(updateDoc);
+  db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectId(req.params.id) }, function (err, result) {
+    if (err) {
+      handleError(res, err.message, 'Failed to update game');
+    } else {
+      var newGame = req.body;
+      db.collection(GAMES_COLLECTION).insertOne(newGame, function (err, doc) {
+        if (err) {
+          handleError(res, err.message, 'Failed to create new game.');
+        } else {
+          res.status(201).json(doc.ops[0]);
+        }
+      });
+    }
+  });
   /*
     db.collection(GAMES_COLLECTION).updateOne({ _id: new ObjectId(req.params.id) }, updateDoc, function (err, doc) {
       if (err) {
