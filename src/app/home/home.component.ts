@@ -36,7 +36,9 @@ export class HomeComponent implements OnInit {
 
   saveGame() {
     console.log(this.newGame);
-    this.gameService.createGame(this.newGame);
+    this.gameService.createGame(this.newGame).subscribe((game) => {
+      console.log(game);
+    });
   }
 
   hideNewGame() {
