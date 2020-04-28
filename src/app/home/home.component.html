@@ -35,7 +35,23 @@
         <mat-card *ngFor="let game of games" style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
           <mat-card-header>
             <h3>{{ game.name }}</h3>
+          </mat-card-header>
 
+          <mat-card-content>
+            <h5>Beschreibung:</h5>
+            <textarea
+              style="width: 90%; min-height: 100px; max-height: 250px;"
+              [(ngModel)]="game.description"
+            ></textarea>
+
+            <h5>Hier kannst du mitspielen:</h5>
+            <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="game.gameRooms"></textarea>
+            <mat-chip-list aria-label="Interessenten:">
+              <mat-chip *ngFor="let committed of game.committed" color="primary">{{ committed }}</mat-chip>
+            </mat-chip-list>
+            <button style="margin-top: 10px;" class="btn btn-primary" (click)="editGame(game)">
+              Änderungen speichern
+            </button>
             <button
               matTooltip="Ich möchte nächste Runde mitspielen"
               *ngIf="!isCommitted(game)"
@@ -53,23 +69,6 @@
               (click)="uncommitToGame(game)"
             >
               <i class="fas fa-hand-point-down"></i>
-            </button>
-          </mat-card-header>
-
-          <mat-card-content>
-            <h5>Beschreibung:</h5>
-            <textarea
-              style="width: 90%; min-height: 100px; max-height: 250px;"
-              [(ngModel)]="game.description"
-            ></textarea>
-
-            <h5>Hier kannst du mitspielen:</h5>
-            <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="game.gameRooms"></textarea>
-            <mat-chip-list aria-label="Interessenten:">
-              <mat-chip *ngFor="let committed of game.committed" color="primary">{{ committed }}</mat-chip>
-            </mat-chip-list>
-            <button style="margin-top: 10px;" class="btn btn-primary" (click)="editGame(game)">
-              Änderungen speichern
             </button>
           </mat-card-content>
         </mat-card>
