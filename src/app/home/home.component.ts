@@ -3,8 +3,8 @@ import { finalize } from 'rxjs/operators';
 
 import { GameService } from './game.service';
 
-export interface Game {
-  _id?: number;
+export class Game {
+  _id?: string;
   name: string;
   description: string;
   gameRooms: string;
@@ -32,27 +32,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.gameService
-      .getGames()
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe((games: Game[]) => {
-        this.games = games;
-      });
+    this.loadGames();
   }
 
   addGameCard() {
     this.displayNewGame = true;
+    this.loadGames();
   }
 
-  saveGame() {}
+  saveGame() {
+    this.gameService.createContact(this.newGame);
+    this.loadGames();
+  }
 
   hideNewGame() {
     this.displayNewGame = false;
   }
 
-  editGame() {}
+  editGame(game: Game) {
+    this.gameService.updateGame(game);
+    this.loadGames();
+  }
+
+  loadGames() {
+    this.gameService.getGames().subscribe((games) => {
+      this.isLoading = false;
+      this.games = games;
+    });
+  }
 }

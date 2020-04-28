@@ -10,9 +10,10 @@
   </div>
   <div class="text-center">
     <app-loader [isLoading]="isLoading"></app-loader>
-
     <div class="text-left" [hidden]="isLoading">
       <div class="row">
+        <!--
+
         <mat-card style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
           <mat-card-header>
             <h3>Wizzard</h3>
@@ -25,7 +26,7 @@
             <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="gameRooms"></textarea>
           </mat-card-content>
         </mat-card>
-
+-->
         <mat-card *ngFor="let game of games" style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
           <mat-card-header>
             <h3>{{ game.name }}</h3>
@@ -39,6 +40,9 @@
 
             <h5>Hier kannst du mitspielen:</h5>
             <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="game.gameRooms"></textarea>
+            <button style="margin-top: 10px;" class="btn btn-primary" (click)="editGame(game)">
+              Änderungen speichern
+            </button>
           </mat-card-content>
         </mat-card>
 
