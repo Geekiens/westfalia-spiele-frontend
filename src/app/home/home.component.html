@@ -1,10 +1,72 @@
 <div class="container-fluid">
   <div class="jumbotron text-center">
     <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
-      <span translate>Hello world !</span>
+      <img class="logo" src="assets/Wappen.png" alt="angular logo" />
+      <span>Lasst uns spielen!</span>
+      <img class="logo" src="assets/Wappen.png" alt="angular logo" />
     </h1>
+    <button class="btn btn-primary" (click)="addGameCard()">Spiel hinzufügen</button>
+    <div [hidden]="isLoading"></div>
+  </div>
+  <div class="text-center">
     <app-loader [isLoading]="isLoading"></app-loader>
-    <q [hidden]="isLoading">{{quote}}</q>
+
+    <div class="text-left" [hidden]="isLoading">
+      <div class="row">
+        <mat-card style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
+          <mat-card-header>
+            <h3>Wizzard</h3>
+          </mat-card-header>
+          <mat-card-content>
+            <h5>Beschreibung:</h5>
+            <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="description"></textarea>
+
+            <h5>Hier kannst du mitspielen:</h5>
+            <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="gameRooms"></textarea>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngFor="let game of games" style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
+          <mat-card-header>
+            <h3>{{ game.name }}</h3>
+          </mat-card-header>
+          <mat-card-content>
+            <h5>Beschreibung:</h5>
+            <textarea
+              style="width: 90%; min-height: 100px; max-height: 250px;"
+              [(ngModel)]="game.description"
+            ></textarea>
+
+            <h5>Hier kannst du mitspielen:</h5>
+            <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="game.gameRooms"></textarea>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngIf="displayNewGame" style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
+          <mat-card-header> </mat-card-header>
+
+          <mat-card-content>
+            <input style="width: 90%; font-weight: bold;" placeholder="Titel" [(ngModel)]="newGame.description" />
+
+            <h5 style="margin-top: 15px;">Beschreibung:</h5>
+            <textarea
+              style="width: 90%; min-height: 100px; max-height: 250px;"
+              [(ngModel)]="newGame.description"
+            ></textarea>
+
+            <h5>Hier kannst du mitspielen:</h5>
+            <textarea
+              style="width: 90%; min-height: 100px; max-height: 250px;"
+              [(ngModel)]="newGame.gameRooms"
+            ></textarea>
+
+            <button style="margin-top: 10px;" class="btn btn-primary" (click)="saveGame()">Spiel speichern</button>
+            <button style="margin-top: 10px; background-color: red; color: white;" class="btn" (click)="hideNewGame()">
+              Spiel verwerfen
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>

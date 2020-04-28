@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 import { Credentials, CredentialsService } from './credentials.service';
 
@@ -14,11 +14,10 @@ export interface LoginContext {
  * The login/logout methods should be replaced with proper implementation.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
-  constructor(private credentialsService: CredentialsService) { }
+  constructor(private credentialsService: CredentialsService) {}
 
   /**
    * Authenticates the user.
@@ -27,9 +26,12 @@ export class AuthenticationService {
    */
   login(context: LoginContext): Observable<Credentials> {
     // Replace by proper authentication call
+    if (context.password !== 'westfalia123') {
+      return throwError('PW');
+    }
     const data = {
       username: context.username,
-      token: '123456'
+      token: '123456',
     };
     this.credentialsService.setCredentials(data, context.remember);
     return of(data);
@@ -44,5 +46,4 @@ export class AuthenticationService {
     this.credentialsService.setCredentials();
     return of(true);
   }
-
 }

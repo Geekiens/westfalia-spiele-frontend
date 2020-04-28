@@ -3,6 +3,7 @@
  * Only platform bootstrapping code should be here.
  * For app-specific initialization, use `app/app.component.ts`.
  */
+import './polyfills.ts';
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -20,5 +21,5 @@ const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 if (environment.hmr) {
   hmrBootstrap(module, bootstrap);
 } else {
-  bootstrap().catch(err => console.error(err));
+  bootstrap().catch((err) => console.error(err));
 }
