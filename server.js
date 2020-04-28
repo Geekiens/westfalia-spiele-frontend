@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
-var ObjectID = mongodb.ObjectID;
+var ObjectId = mongodb.ObjectId;
 
 var GAMES_COLLECTION = 'games';
 
@@ -72,7 +72,7 @@ app.put('/api/games/:id', function (req, res) {
   // delete updateDoc._id;
   // updateDoc._id = req.params.id;
   console.log(updateDoc);
-  db.collection(GAMES_COLLECTION).findOneAndUpdate({ _id: { $eq: updateDoc._id } }, updateDoc, function (err, doc) {
+  db.collection(GAMES_COLLECTION).findOneAndUpdate(ObjectId(req.params.id), updateDoc, function (err, doc) {
     if (err) {
       handleError(res, err.message, 'Failed to update game with ID' + updateDoc._id);
     } else {
@@ -82,7 +82,7 @@ app.put('/api/games/:id', function (req, res) {
 });
 
 app.delete('/api/games/:id', function (req, res) {
-  db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+  db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectId(req.params.id) }, function (err, result) {
     if (err) {
       handleError(res, err.message, 'Failed to delete game');
     } else {
