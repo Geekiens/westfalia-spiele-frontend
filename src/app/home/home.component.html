@@ -36,6 +36,25 @@
           <mat-card-header>
             <h3>{{ game.name }}</h3>
           </mat-card-header>
+          <button
+            matTooltip="Ich möchte nächste Runde mitspielen"
+            *ngIF="!isCommitted(game)"
+            style="float: right; background-color: #17a2b8; color: white;"
+            class="btn btn-primary"
+            (click)="commitToGame(game)"
+          >
+            <i class="fas fa-hand-point-up"></i>
+          </button>
+          <button
+            matTooltip="Ich bin raus"
+            *ngIF="isCommitted(game)"
+            style="float: right; background-color: #17a2b8; color: white;"
+            class="btn btn-primary"
+            (click)="uncommitToGame(game)"
+          >
+            <i class="fas fa-hand-point-down"></i>
+          </button>
+
           <mat-card-content>
             <h5>Beschreibung:</h5>
             <textarea

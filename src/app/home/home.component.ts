@@ -2,12 +2,14 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { GameService } from './game.service';
+import { CredentialsService } from '@app/auth';
 
 export class Game {
   _id?: string;
   name: string;
   description: string;
   gameRooms: string;
+  committed?: string[];
 }
 
 @Component({
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
   newGame: Game = new Game();
   displayNewGame = false;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private credentialsService: CredentialsService) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -55,5 +57,21 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
       this.games = games;
     });
+  }
+
+  commitToGame(game: Game) {
+    this.gameService.commitToGame(game._id, this.credentialsService.credentials.username).subscribe(() => {
+      this.loadGames();
+    });
+  }
+
+  uncommitToGame(game: Game) {
+    this.gameService.uncommitToGame(game._id, this.credentialsService.credentials.username).subscribe(() => {
+      this.loadGames();
+    });
+  }
+
+  isCommitted(game: Game) {
+    return game.committed.includes(this.credentialsService.credentials.username);
   }
 }

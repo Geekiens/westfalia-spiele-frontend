@@ -25,4 +25,14 @@ export class GameService {
     const putUrl = this.gamesUrl + '/' + putGame._id;
     return this.http.put<void>(putUrl, putGame);
   }
+
+  commitToGame(id: string, username: string): Observable<void> {
+    const commitUrl = this.gamesUrl + '/' + id + '/commit/' + username;
+    return this.http.get<void>(commitUrl);
+  }
+
+  uncommitToGame(id: string, username: string): Observable<void> {
+    const uncommitUrl = this.gamesUrl + '/' + id + '/uncommit/' + username;
+    return this.http.get<void>(uncommitUrl);
+  }
 }
