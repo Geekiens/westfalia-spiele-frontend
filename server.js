@@ -70,11 +70,11 @@ app.post('/api/games', function (req, res) {
 app.put('/api/games/:id', function (req, res) {
   var updateDoc = req.body;
   // delete updateDoc._id;
-  updateDoc._id = req.params.id;
+  // updateDoc._id = req.params.id;
   console.log(updateDoc);
-  db.collection(GAMES_COLLECTION).findOneAndUpdate({ _id: { $eq: req.params.id } }, updateDoc, function (err, doc) {
+  db.collection(GAMES_COLLECTION).findOneAndUpdate({ _id: { $eq: updateDoc._id } }, updateDoc, function (err, doc) {
     if (err) {
-      handleError(res, err.message, 'Failed to update game');
+      handleError(res, err.message, 'Failed to update game with ID' + updateDoc._id);
     } else {
       res.status(200).json(doc);
     }
