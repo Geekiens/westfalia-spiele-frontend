@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   games: Game[];
   isLoading = false;
 
-  newGame: Game;
+  newGame: Game = new Game();
   displayNewGame = false;
 
   constructor(private gameService: GameService) {}
