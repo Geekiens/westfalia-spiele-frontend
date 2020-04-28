@@ -6,13 +6,16 @@
       <img class="logo" src="assets/Wappen.png" alt="angular logo" />
     </h1>
     <button class="btn btn-primary" (click)="addGameCard()">Spiel hinzufügen</button>
-    <div [hidden]="isLoading"></div>
+    <div></div>
   </div>
   <div class="text-center">
     <app-loader [isLoading]="isLoading"></app-loader>
-    <div class="text-left" [hidden]="isLoading">
+    <div class="text-left">
       <div class="row">
         <!--
+
+        [hidden]="isLoading"
+
 
         <mat-card style="border: 7px solid white;" class="jumbotron col-lg-4 col-md-6">
           <mat-card-header>
