@@ -44,7 +44,7 @@
               [(ngModel)]="game.description"
             ></textarea>
 
-            <h5 style="float: left;">Es wollen mitspielen::</h5>
+            <h5 style="float: left; margin-right: 20px;">Es wollen mitspielen:</h5>
             <button
               matTooltip="Ich möchte nächste Runde mitspielen"
               *ngIf="!isCommitted(game)"
@@ -52,7 +52,7 @@
               class="btn btn-primary"
               (click)="commitToGame(game)"
             >
-              <i class="fas fa-hand-point-up"></i>
+              <i style="font-size: smaller;" class="fas fa-hand-point-up"></i>
             </button>
             <button
               matTooltip="Ich bin raus"
@@ -61,10 +61,10 @@
               class="btn btn-primary"
               (click)="uncommitToGame(game)"
             >
-              <i class="fas fa-hand-point-down"></i>
+              <i style="font-size: smaller;" class="fas fa-hand-point-down"></i>
             </button>
-            <mat-chip-list aria-label="Interessenten:">
-              <mat-chip *ngFor="let committed of game.committed" color="primary">{{ committed }}</mat-chip>
+            <mat-chip-list style="float: none;" aria-label="Interessenten:">
+              <mat-chip *ngFor="let committed of game.committed" color="primary" selected>{{ committed }}</mat-chip>
             </mat-chip-list>
 
             <h5>Hier kannst du mitspielen:</h5>

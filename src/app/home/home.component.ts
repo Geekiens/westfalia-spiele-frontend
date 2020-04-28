@@ -38,12 +38,15 @@ export class HomeComponent implements OnInit {
 
   saveGame() {
     this.gameService.createGame(this.newGame).subscribe(() => {
+      this.displayNewGame = false;
+      this.newGame = new Game();
       this.loadGames();
     });
   }
 
   hideNewGame() {
     this.displayNewGame = false;
+    this.newGame = new Game();
   }
 
   editGame(game: Game) {
