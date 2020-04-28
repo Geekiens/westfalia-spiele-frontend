@@ -22,12 +22,6 @@ export class HomeComponent implements OnInit {
   newGame: Game;
   displayNewGame = false;
 
-  gameRooms: string = 'test';
-  description: string =
-    'Wizzard ist ein Kartenspiel.\n' +
-    'Es müssen in bis zu 17 runden Stiche geraten werden.\n' +
-    'Die Spielfauer ist etwa 30 Minuten pro Runde.';
-
   constructor(private gameService: GameService) {}
 
   ngOnInit() {
@@ -41,8 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   saveGame() {
-    this.gameService.createContact(this.newGame);
-    this.loadGames();
+    console.log(this.newGame);
+    this.gameService.createGame(this.newGame);
   }
 
   hideNewGame() {

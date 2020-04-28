@@ -16,7 +16,7 @@ export class GameService {
     return this.http.get<Game[]>(this.gamesUrl);
   }
 
-  createContact(newGame: Game): Observable<void> {
+  createGame(newGame: Game): Observable<void> {
     return this.http.post<void>(this.gamesUrl, newGame);
   }
 
