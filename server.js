@@ -39,7 +39,7 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({ error: message });
 }
 
-app.get('/games', function (req, res) {
+app.get('/api/games', function (req, res) {
   db.collection(GAMES_COLLECTION)
     .find({})
     .toArray(function (err, games) {
@@ -51,7 +51,7 @@ app.get('/games', function (req, res) {
     });
 });
 
-app.post('/games', function (req, res) {
+app.post('/api/games', function (req, res) {
   var newGame = req.body;
 
   if (!req.body.name) {
@@ -67,7 +67,7 @@ app.post('/games', function (req, res) {
   }
 });
 
-app.put('/games/:id', function (req, res) {
+app.put('/api/games/:id', function (req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
@@ -81,7 +81,7 @@ app.put('/games/:id', function (req, res) {
   });
 });
 
-app.delete('/games/:id', function (req, res) {
+app.delete('/api/games/:id', function (req, res) {
   db.collection(GAMES_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
     if (err) {
       handleError(res, err.message, 'Failed to delete game');
