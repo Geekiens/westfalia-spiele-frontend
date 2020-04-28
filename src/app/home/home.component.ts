@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   loadGames() {
     this.gameService.getGames().subscribe((games) => {
       this.isLoading = false;
-      this.games = games;
+      this.games = games.sort((a, b) => a.name.localeCompare(b.name, 'de-DE'));
     });
   }
 
