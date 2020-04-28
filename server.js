@@ -87,7 +87,7 @@ app.put('/api/games/:id', function (req, res) {
     }
   });
 
-  app.get('/api/games/:id/commit/:username', function (req, res) {
+  app.get('/api/games/:id/commit', function (req, res) {
     var username = req.params.username;
     db.collection(GAMES_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function (err, doc) {
       if (err) {
@@ -101,9 +101,9 @@ app.put('/api/games/:id', function (req, res) {
             handleError(res, err.message, 'Failed to add commit');
           } else {
             if (!updateDoc.committed) {
-              updateDoc.committed = [username];
+              updateDoc.committed = ['username'];
             } else {
-              updateDoc.committed.push(username);
+              updateDoc.committed.push('username');
             }
             db.collection(GAMES_COLLECTION).insertOne(updateDoc, function (err, doc) {
               if (err) {
