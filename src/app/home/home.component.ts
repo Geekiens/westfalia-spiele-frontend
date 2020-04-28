@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
   }
 
   isCommitted(game: Game) {
-    if (!game.committed) {
+    if (!game?.committed || game.committed === []) {
       return false;
     }
     return game.committed.includes(this.credentialsService.credentials.username);
