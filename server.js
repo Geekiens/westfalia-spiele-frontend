@@ -110,7 +110,7 @@ app.get('/api/games/:id/commit/:username', function (req, res) {
             if (err) {
               handleError(res, err.message, 'Failed to add commit');
             } else {
-              res.status(201).json(doc.ops[0]);
+              res.status(201).json();
             }
           });
         }
@@ -141,7 +141,7 @@ app.get('/api/games/:id/uncommit/:username', function (req, res) {
             if (err) {
               handleError(res, err.message, 'Failed to remove commit');
             } else {
-              res.status(201).json(doc.ops[0]);
+              res.status(201).json();
             }
           });
         }
