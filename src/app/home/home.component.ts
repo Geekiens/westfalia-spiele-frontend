@@ -35,9 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   saveGame() {
-    console.log(this.newGame);
-    this.gameService.createGame(this.newGame).subscribe((game) => {
-      console.log(game);
+    this.gameService.createGame(this.newGame).subscribe(() => {
+      this.loadGames();
     });
   }
 
@@ -46,8 +45,9 @@ export class HomeComponent implements OnInit {
   }
 
   editGame(game: Game) {
-    this.gameService.updateGame(game);
-    this.loadGames();
+    this.gameService.updateGame(game).subscribe(() => {
+      this.loadGames();
+    });
   }
 
   loadGames() {
