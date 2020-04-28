@@ -55,18 +55,18 @@
           <mat-card-header> </mat-card-header>
 
           <mat-card-content>
-            <input style="width: 90%; font-weight: bold;" placeholder="Titel" [(ngModel)]="newGame.description" />
+            <input style="width: 90%; font-weight: bold;" placeholder="Titel" [(ngModel)]="this.newGame.name" />
 
             <h5 style="margin-top: 15px;">Beschreibung:</h5>
             <textarea
               style="width: 90%; min-height: 100px; max-height: 250px;"
-              [(ngModel)]="newGame.description"
+              [(ngModel)]="this.newGame.description"
             ></textarea>
 
             <h5>Hier kannst du mitspielen:</h5>
             <textarea
               style="width: 90%; min-height: 100px; max-height: 250px;"
-              [(ngModel)]="newGame.gameRooms"
+              [(ngModel)]="this.newGame.gameRooms"
             ></textarea>
 
             <button style="margin-top: 10px;" class="btn btn-primary" (click)="saveGame()">Spiel speichern</button>
