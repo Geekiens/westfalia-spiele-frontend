@@ -64,10 +64,12 @@
               <i style="font-size: smaller;" class="fas fa-hand-point-down"></i>
             </button>
             <br />
+
+            <div style="margin-top: 10px;"></div>
             <br />
-            <mat-chip-list style="float: left;" aria-label="Interessenten:">
-              <mat-chip *ngFor="let committed of game.committed" color="primary" selected>{{ committed }}</mat-chip>
-            </mat-chip-list>
+            <span class="chipSpan" *ngFor="let committed of game.committed" color="primary" selected>{{
+              committed
+            }}</span>
 
             <h5>Hier kannst du mitspielen:</h5>
             <textarea style="width: 90%; min-height: 100px; max-height: 250px;" [(ngModel)]="game.gameRooms"></textarea>
