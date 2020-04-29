@@ -48,7 +48,7 @@
             <button
               matTooltip="Ich möchte nächste Runde mitspielen"
               *ngIf="!isCommitted(game)"
-              style="float: left; background-color: #17a2b8; color: white;"
+              style="float: left; background-color: #17a2b8; color: white; height: 28px; padding-top: 0;"
               class="btn btn-primary"
               (click)="commitToGame(game)"
             >
@@ -57,12 +57,13 @@
             <button
               matTooltip="Ich bin raus"
               *ngIf="isCommitted(game)"
-              style="float: left; background-color: #17a2b8; color: white;"
+              style="float: left; background-color: #17a2b8; color: white; height: 28px; padding-top: 0;"
               class="btn btn-primary"
               (click)="uncommitToGame(game)"
             >
               <i style="font-size: smaller;" class="fas fa-hand-point-down"></i>
             </button>
+            <br />
             <br />
             <mat-chip-list style="float: left;" aria-label="Interessenten:">
               <mat-chip *ngFor="let committed of game.committed" color="primary" selected>{{ committed }}</mat-chip>
